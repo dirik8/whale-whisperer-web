@@ -1,11 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, GraduationCap, Play, Layers3, BookText } from "lucide-react";
+import { BookOpen, GraduationCap, Play, Layers3, BookText, ListCheck, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const masterclasses = [
@@ -13,170 +13,218 @@ const masterclasses = [
     title: "Whale Mindset Mastery", 
     category: "Psychology", 
     progress: 45,
-    description: "Master the psychology of successful trading and develop elite mental habits",
+    description: "Master the psychology of successful trading and develop elite mental habits.",
     icon: BookText
   },
   { 
     title: "Day Trading Foundations", 
     category: "Day Trading", 
     progress: 80,
-    description: "Learn the complete framework for successful intraday trading strategies",
+    description: "Learn the complete framework for successful intraday trading strategies.",
     icon: Play
   },
   { 
     title: "Macro Moves Bootcamp", 
     category: "Macro", 
     progress: 10,
-    description: "Understanding global market trends and capitalizing on major economic shifts",
+    description: "Understanding global market trends and capitalizing on major economic shifts.",
     icon: Layers3
   },
   { 
     title: "Swing Trading Strategies", 
     category: "Swing", 
     progress: 70,
-    description: "Capture multi-day trends with our proprietary swing trading techniques",
+    description: "Capture multi-day trends with our proprietary swing trading techniques.",
     icon: GraduationCap 
   },
   { 
     title: "Advanced Chart Analysis", 
     category: "Technical",
     progress: 30,
-    description: "Take your technical analysis skills to institutional-grade level",
+    description: "Take your technical analysis skills to institutional-grade level.",
     icon: BookOpen
   },
   { 
     title: "Risk Management Mastery", 
     category: "Psychology", 
     progress: 65,
-    description: "Learn our exact risk protocols that protect capital during volatile markets",
+    description: "Learn our exact risk protocols that protect capital during volatile markets.",
     icon: BookText
+  }
+];
+
+const strategies = [
+  {
+    title: "Layered Trading Approach",
+    desc: "Blend macro, swing, and intraday setups for agility in any market regime.",
+    icon: Layers3,
+  },
+  {
+    title: "Edge Through Psychology",
+    desc: "Implement routines and journaling for discipline and consistent profits.",
+    icon: BookText,
+  },
+  {
+    title: "Risk-First Frameworks",
+    desc: "Tools and templates to size your trades and manage capital like a pro.",
+    icon: ListCheck,
   },
 ];
 
-const EducationHubPage = () => (
-  <>
-    <Header />
-    <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-jet">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3')] bg-fixed opacity-5"></div>
-      
-      <section className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeading
-            title="Your Command Center for Market Mastery"
-            subtitle="Self-paced lessons, progress tracking, and expert insights crafted for serious traders."
-            align="center"
-            className="gold-gradient text-4xl md:text-5xl lg:text-6xl font-bold mb-2"
-          />
-          
-          <div className="mt-8 mb-16 flex flex-wrap gap-3 items-center justify-center">
+const allCategories = ["Day Trading", "Swing", "Macro", "Psychology", "Technical", "All"];
+
+const EducationHubPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredMasterclasses =
+    selectedCategory === "All"
+      ? masterclasses
+      : masterclasses.filter((m) => m.category === selectedCategory);
+
+  return (
+    <>
+      <Header />
+      <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-jet">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80')] bg-fixed opacity-5"></div>
+
+        {/* Hero + Value Section */}
+        <section className="container mx-auto px-4 py-16 relative z-10">
+          <div className="max-w-5xl mx-auto mb-12">
+            <SectionHeading
+              title="Your Command Center for Market Mastery"
+              subtitle="Cutting-edge lessons, progress tracking, and exclusive tools crafted by full-time traders—so you can shortcut years of struggle."
+              align="center"
+              className="gold-gradient text-4xl md:text-5xl lg:text-6xl font-bold mb-2"
+            />
+            <div className="bg-gold/10 border border-gold/20 rounded-xl p-6 mt-6 shadow flex flex-col md:flex-row gap-6 items-center justify-between">
+              <div className="flex items-center gap-4">
+                <Star className="text-gold w-9 h-9" />
+                <div>
+                  <div className="font-bold text-white/90 text-lg">Why BWC Education Hub delivers:</div>
+                  <div className="text-gold font-semibold text-sm">No gatekeeping. No filler—100% actionable, updated monthly.</div>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Button asChild className="bg-gradient-gold text-jet font-semibold px-6 py-2 rounded-md hover:scale-105 transition">
+                  <Link to="/apply">Unlock Full Access</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+          {/* Filter Buttons */}
+          <div className="mb-10 flex flex-wrap gap-3 items-center justify-center animate-fade-in">
             <span className="bg-gold text-jet font-bold px-4 py-2 rounded-full shadow-lg">Categories:</span>
-            {["Day Trading", "Swing", "Macro", "Psychology", "Technical", "All"].map((category) => (
+            {allCategories.map((category) => (
               <button 
                 key={category} 
-                className="bg-charcoal/80 hover:bg-gold/20 border border-gold/20 text-white px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105"
+                className={`border px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold ${
+                  selectedCategory === category
+                    ? "bg-gradient-gold text-jet border-gold shadow-md"
+                    : "bg-charcoal/80 text-white border-gold/20 hover:bg-gold/20"
+                }`}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </button>
             ))}
           </div>
-        </div>
 
-        <div className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {masterclasses.map((cls, idx) => {
-            const Icon = cls.icon;
-            return (
-              <Card 
-                key={idx} 
-                className="group bg-charcoal/80 border border-gold/30 rounded-xl shadow-xl backdrop-blur-sm hover:shadow-gold/20 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden"
-              >
-                <div className="h-2 w-full bg-gradient-gold"></div>
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-gradient-to-br from-gold to-dark-gold rounded-full p-3 mr-4 shadow-lg">
-                      <Icon size={24} className="text-jet" />
+          {/* Masterclass Grid */}
+          <div className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredMasterclasses.map((cls, idx) => {
+              const Icon = cls.icon;
+              return (
+                <Card 
+                  key={idx} 
+                  className="group bg-charcoal/90 border border-gold/30 rounded-xl shadow-xl backdrop-blur-sm hover:shadow-gold/20 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden"
+                >
+                  <div className="h-2 w-full bg-gradient-gold"></div>
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-gradient-to-br from-gold to-dark-gold rounded-full p-3 mr-4 shadow-lg">
+                        <Icon size={24} className="text-jet" />
+                      </div>
+                      <div>
+                        <div className="gold-gradient text-xl font-bold">{cls.title}</div>
+                        <div className="text-gold/80 text-sm">{cls.category}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="gold-gradient text-xl font-bold">{cls.title}</div>
-                      <div className="text-gold/80 text-sm">{cls.category}</div>
+                    
+                    <p className="text-white/80 mb-6">{cls.description}</p>
+
+                    <div className="relative h-2 w-full bg-charcoal/30 rounded-full mb-3 overflow-hidden">
+                      <div 
+                        style={{ width: `${cls.progress}%` }} 
+                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-gold to-light-gold rounded-full transition-all duration-1000 ease-out"
+                      ></div>
                     </div>
-                  </div>
-                  
-                  <p className="text-white/80 mb-6">{cls.description}</p>
-                  
-                  <div className="relative h-2 w-full bg-charcoal/30 rounded-full mb-3 overflow-hidden">
-                    <div 
-                      style={{ width: `${cls.progress}%` }} 
-                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-gold to-light-gold rounded-full transition-all duration-1000 ease-out"
-                    ></div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <div className="text-white/80 text-sm mb-4">Progress: {cls.progress}%</div>
-                    {cls.progress === 100 ? (
-                      <span className="text-gold text-sm font-medium">Completed</span>
-                    ) : null}
-                  </div>
-                  
-                  <Button variant="outline" className="w-full border-gold text-gold hover:bg-gold/10 transition-all duration-300">
-                    {cls.progress > 0 ? "Continue Learning" : "Start Course"}
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-        
-        <div className="mt-16">
-          <Card className="max-w-4xl mx-auto rounded-xl overflow-hidden border-0 shadow-2xl">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-gold/30 to-midnight"></div>
-              <div className="px-8 py-12 md:p-12 relative z-10 flex flex-col md:flex-row items-center">
-                <div className="md:w-2/3 mb-8 md:mb-0 md:pr-8">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 gold-gradient">Ready to Unlock Your Full Trading Potential?</h3>
-                  <p className="text-white/90 mb-6">
-                    "Joining the Hub was the best decision of my trading journey. The psychology module alone 
-                    tripled my win rate and the trade alerts provided consistent 20%+ returns. Every serious 
-                    trader needs this education."
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 rounded-full bg-gold/20 mr-4 flex items-center justify-center">
-                      <span className="text-gold font-bold">CT</span>
+                    <div className="flex justify-between items-center">
+                      <div className="text-white/80 text-sm mb-4">Progress: {cls.progress}%</div>
+                      {cls.progress === 100 && (
+                        <span className="text-gold text-sm font-medium">Completed</span>
+                      )}
                     </div>
-                    <div>
-                      <div className="text-gold font-semibold">Chloe T.</div>
-                      <div className="text-white/70 text-sm">Member since 2023 • 317% portfolio growth</div>
+                    <Button variant="outline" className="w-full border-gold text-gold hover:bg-gold/10 transition-all duration-300 rounded-lg font-bold">
+                      {cls.progress > 0 ? "Continue Learning" : "Start Course"}
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+          {/* Featured strategies */}
+          <div className="mt-16 max-w-5xl mx-auto">
+            <SectionHeading
+              title="Featured Strategies & Tools"
+              subtitle="What sets our curriculum apart:"
+              align="center"
+              className="mb-6"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {strategies.map((s, i) => {
+                const Icon = s.icon;
+                return (
+                  <div key={i} className="bg-midnight/70 border border-gold/20 rounded-lg p-6 flex flex-col items-center text-center shadow">
+                    <div className="bg-gradient-gold rounded-full p-3 mb-3 flex items-center justify-center">
+                      <Icon className="text-jet w-7 h-7" />
                     </div>
+                    <div className="font-bold text-white text-lg mb-2">{s.title}</div>
+                    <p className="text-white/70">{s.desc}</p>
                   </div>
-                </div>
-                <div className="md:w-1/3 flex justify-center">
-                  <Button asChild className="bg-gradient-gold text-jet font-semibold text-lg px-8 py-6 rounded-lg hover:scale-105 transition-transform shadow-xl">
-                    <Link to="/apply">Unlock Premium Access</Link>
-                  </Button>
-                </div>
-              </div>
+                );
+              })}
             </div>
-          </Card>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-charcoal/50 border border-gold/10 rounded-xl p-6 text-center">
-            <div className="text-4xl text-gold font-bold mb-2">27+</div>
-            <div className="text-white/80">Expert Masterclasses</div>
           </div>
-          <div className="bg-charcoal/50 border border-gold/10 rounded-xl p-6 text-center">
-            <div className="text-4xl text-gold font-bold mb-2">94%</div>
-            <div className="text-white/80">Completion Rate</div>
+          {/* Testimonials and stats section */}
+          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+            <div className="bg-charcoal/70 border border-gold/10 rounded-xl p-6 text-center shadow">
+              <div className="text-4xl text-gold font-bold mb-2">27+</div>
+              <div className="text-white/80">Expert Masterclasses</div>
+            </div>
+            <div className="bg-charcoal/70 border border-gold/10 rounded-xl p-6 text-center shadow">
+              <div className="text-4xl text-gold font-bold mb-2">94%</div>
+              <div className="text-white/80">Completion Rate</div>
+            </div>
+            <div className="bg-charcoal/70 border border-gold/10 rounded-xl p-6 text-center shadow">
+              <div className="text-4xl text-gold font-bold mb-2">3.2x</div>
+              <div className="text-white/80">Avg. ROI Improvement</div>
+            </div>
           </div>
-          <div className="bg-charcoal/50 border border-gold/10 rounded-xl p-6 text-center">
-            <div className="text-4xl text-gold font-bold mb-2">3.2x</div>
-            <div className="text-white/80">Average ROI Improvement</div>
+          {/* Final CTA */}
+          <div className="mt-14 max-w-3xl mx-auto bg-gold/5 border border-gold/20 rounded-xl p-8 flex flex-col items-center shadow animate-fade-in">
+            <h3 className="text-2xl md:text-3xl font-bold gold-gradient mb-2 text-center">Ready for the Next Level?</h3>
+            <p className="text-white/90 mb-6 text-center">
+              “Expertise is not a secret—it's a system. Join the traders who get our edge, mastery frameworks, and real accountability.”
+            </p>
+            <Button asChild className="bg-gradient-gold text-jet text-lg font-semibold px-10 py-4 rounded-lg hover:scale-105 transition">
+              <Link to="/apply">Unlock Premium Access</Link>
+            </Button>
           </div>
-        </div>
-
-      </section>
-    </main>
-    <Footer />
-  </>
-);
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+};
 
 export default EducationHubPage;
