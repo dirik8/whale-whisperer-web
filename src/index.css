@@ -96,6 +96,30 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-jet text-white font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+
+  .gold-gradient {
+    @apply bg-gradient-gold bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply py-16 px-4 md:py-24 md:px-8 lg:px-16;
+  }
+
+  .fade-in {
+    @apply animate-fade-in;
+  }
+
+  .slide-in {
+    @apply animate-slide-in;
+  }
+
+  .gold-border {
+    @apply border border-gold;
   }
 }
