@@ -3,7 +3,7 @@ import React from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
-import { users } from "lucide-react";
+import { Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const teamMembers = [
   {
     name: "Leo Grayson",
     title: "Chief Technology Officer",
-    bio: "10+ years in FinTech. Code whisperer. Mastermind behind BWC’s real-time trade signals.",
+    bio: "10+ years in FinTech. Code whisperer. Mastermind behind BWC's real-time trade signals.",
     funFact: "Hacked his first stock screener at age 14.",
     social: {
       linkedin: "#",
@@ -48,7 +48,7 @@ const TeamPage = () => (
               className="group bg-charcoal/70 border border-gold/15 rounded-xl p-8 text-white relative transition-all hover:scale-105 shadow-lg animate-fade-in"
             >
               <div className="w-16 h-16 mx-auto flex items-center justify-center bg-gold/10 rounded-full mb-4">
-                <users className="text-gold w-8 h-8" />
+                <Users className="text-gold w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold gold-gradient mb-1 text-center">{member.name}</h3>
               <p className="text-gold/80 mb-2 text-center text-sm">{member.title}</p>
@@ -57,8 +57,8 @@ const TeamPage = () => (
                 <span className="opacity-80 group-hover:opacity-100 transition-opacity">{member.funFact}</span>
               </div>
               <div className="flex justify-center gap-4">
-                <a href={member.social.linkedin}><span className="sr-only">LinkedIn</span><users className="w-5 h-5 text-gold hover:scale-110 transition" /></a>
-                <a href={member.social.twitter}><span className="sr-only">Twitter</span><users className="w-5 h-5 text-gold hover:scale-110 transition" /></a>
+                <a href={member.social.linkedin}><span className="sr-only">LinkedIn</span><Users className="w-5 h-5 text-gold hover:scale-110 transition" /></a>
+                <a href={member.social.twitter}><span className="sr-only">Twitter</span><Users className="w-5 h-5 text-gold hover:scale-110 transition" /></a>
               </div>
             </div>
           ))}
