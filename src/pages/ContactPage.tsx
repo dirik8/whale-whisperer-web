@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -356,7 +355,7 @@ const ContactPage = () => {
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="none">No prior investment experience</SelectItem>
-                                <SelectItem value="beginner">Beginner (< 1 year)</SelectItem>
+                                <SelectItem value="beginner">Beginner (&lt; 1 year)</SelectItem>
                                 <SelectItem value="intermediate">Intermediate (1-3 years)</SelectItem>
                                 <SelectItem value="advanced">Advanced (3-5 years)</SelectItem>
                                 <SelectItem value="expert">Expert (5+ years)</SelectItem>
