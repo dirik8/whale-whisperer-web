@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import SectionHeading from "@/components/ui/section-heading";
@@ -11,17 +10,17 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left column: Image */}
           <div className="relative animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            <div className="aspect-[4/5] relative z-10">
+            <div className="aspect-[4/5] relative z-10 mb-8">
               <img 
                 src="https://images.unsplash.com/photo-1500673922987-e212871fec22" 
                 alt="Founder of Bullish Whales Club" 
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
-            <div className="absolute top-8 -right-8 w-full h-full border-2 border-gold rounded-lg -z-10"></div>
+            <div className="absolute top-8 -right-8 w-full h-[calc(100%-2rem)] border-2 border-gold rounded-lg -z-10"></div>
             
             {/* Experience badge */}
-            <div className="absolute -bottom-6 -left-6 bg-gold text-jet font-bold py-3 px-6 rounded-lg">
+            <div className="absolute -bottom-2 -left-6 bg-gold text-jet font-bold py-3 px-6 rounded-lg">
               7+ Years Trading Experience
             </div>
           </div>

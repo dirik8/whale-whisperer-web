@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -35,6 +34,7 @@ const Header = () => {
             {isDropdownOpen && (
               <div className="absolute top-full mt-2 w-48 bg-charcoal border border-gold/20 shadow-lg rounded-md py-2">
                 <Link to="/programs" className="block px-4 py-2 text-white hover:bg-gold/10 transition-colors duration-200">All Programs</Link>
+                <Link to="/programs/vip-university" className="block px-4 py-2 text-white hover:bg-gold/10 transition-colors duration-200">MK VIP University</Link>
                 <Link to="/education-hub" className="block px-4 py-2 text-white hover:bg-gold/10 transition-colors duration-200">Education Hub</Link>
                 <Link to="/coaching" className="block px-4 py-2 text-white hover:bg-gold/10 transition-colors duration-200">Elite Coaching</Link>
               </div>
