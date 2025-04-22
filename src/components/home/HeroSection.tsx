@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Users, Award, ArrowRight } from "lucide-react";
 
-const heroBg = "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"; // Crypto/forex themed
+const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // New bull image
 
 const HeroSection = () => {
   return (
@@ -12,8 +12,8 @@ const HeroSection = () => {
       {/* Animated background image related to crypto/forex */}
       <img
         src={heroBg}
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none animate-fade-in"
-        alt="Crypto hero"
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-40 pointer-events-none animate-fade-in"
+        alt="Crypto bull"
         style={{ zIndex: 0, maxHeight: 700, minHeight: 400 }}
       />
       {/* Background gradient overlays */}
@@ -23,7 +23,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-block px-4 py-2 bg-gold/10 rounded-full border border-gold/20 text-gold font-medium text-sm mb-6 animate-fade-in">
-            Only 50 traders accepted per quarter
+            We accept only 50 traders annually
           </div>
           
           {/* Headline */}

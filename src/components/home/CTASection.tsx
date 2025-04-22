@@ -37,7 +37,7 @@ const CTASection = () => {
           </div>
           
           <p className="text-white/50 mt-6 text-sm animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            Only 50 new members accepted each quarter. Applications reviewed within 48 hours.
+            We accept only 50 traders annually. Applications reviewed within 48 hours.
           </p>
         </div>
       </div>

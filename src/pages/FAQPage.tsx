@@ -1,10 +1,13 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { HelpCircle, ChevronRight, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Helmet } from "react-helmet-async";
 
 const faqCategories = [
   { category: "Membership" },
@@ -13,8 +16,8 @@ const faqCategories = [
   { category: "Tech" },
 ];
 
-// Sample Unsplash crypto image for style
-const faqHeroImage = "https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&w=1100&q=80";
+// New bull hero image
+const faqHeroImage = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png";
 
 const faqs = [
   {
@@ -29,7 +32,7 @@ const faqs = [
   },
   {
     category: "Membership",
-    question: "What’s included with membership?",
+    question: "What's included with membership?",
     answer: "You get access to masterclasses, strategy breakdowns, live calls, Discord chats, coaching opportunities, and members-only trade alerts."
   },
   {
@@ -65,61 +68,163 @@ const extraContent = {
 };
 
 const FAQPage = () => {
-  const [activeCategory, setActiveCategory] = React.useState("Membership");
+  const [activeCategory, setActiveCategory] = useState("Membership");
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const filteredFaqs = searchQuery 
+    ? faqs.filter(faq => 
+        faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        faq.answer.toLowerCase().includes(searchQuery.toLowerCase()))
+    : faqs.filter((f) => f.category === activeCategory);
+
   return (
     <>
+      <Helmet>
+        <title>Frequently Asked Questions | Bullish Whales Trading Club</title>
+        <meta name="description" content="Get answers to common questions about our trading programs, membership benefits, and more." />
+      </Helmet>
       <Header />
-      <main className="min-h-screen pt-24 bg-gradient-to-br from-charcoal to-midnight relative">
-        {/* Crypto/Finance attention-grabbing background image */}
-        <img
-          src={faqHeroImage}
-          alt="FAQ skyscraper"
-          className="absolute top-0 left-0 w-full h-[320px] object-cover opacity-40 animate-fade-in"
-          style={{ zIndex: 0 }}
-        />
-        {/* Overlay */}
-        <div className="absolute top-0 left-0 w-full h-[320px] bg-gradient-to-b from-charcoal/85 to-midnight/70" style={{ zIndex: 1 }}></div>
-        <section className="container mx-auto px-4 max-w-3xl py-16 relative z-10">
-          <SectionHeading
-            title="Straight Answers. No Fluff."
-            subtitle="Your biggest questions on membership, coaching, and more—answered."
-            align="center"
+      <main className="min-h-screen bg-gradient-to-br from-charcoal to-midnight relative">
+        {/* Hero section with improved styling */}
+        <div className="relative h-[480px] overflow-hidden">
+          {/* New bull hero image */}
+          <img
+            src={faqHeroImage}
+            alt="FAQ Hero"
+            className="absolute w-full h-full object-cover opacity-30"
           />
-          <div className="flex gap-2 mb-6 justify-center animate-fade-in" style={{ animationDelay: ".15s" }}>
-            {faqCategories.map(({ category }) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-md font-semibold transition-all border ${
-                  activeCategory === category
-                    ? "bg-gold text-jet border-gold shadow-md animate-pulse"
-                    : "bg-charcoal text-white/80 border-gold/20 hover:bg-gold/10"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 to-midnight/80"></div>
+          
+          <div className="container mx-auto px-4 relative z-10 h-full flex flex-col justify-center items-center text-center pt-32">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gold/10 text-gold border border-gold/20 mb-4 animate-fade-in">
+              <HelpCircle className="w-4 h-4 mr-2" />
+              <span>Knowledge Base</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <span className="gold-gradient">Frequently Asked</span> Questions
+            </h1>
+            <p className="text-xl text-white/70 max-w-2xl mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              Get answers to common questions about our trading programs, membership benefits, and expert insights
+            </p>
+            
+            {/* Search bar */}
+            <div className="relative w-full max-w-lg mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" />
+              <Input 
+                type="text"
+                placeholder="Search for questions..." 
+                className="pl-10 bg-charcoal/50 text-white border border-gold/20 ring-gold/30 focus:ring-gold/50 py-6 text-lg rounded-lg"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
           </div>
-          <Accordion type="single" collapsible className="animate-fade-in" style={{ animationDelay: ".18s" }}>
-            {faqs
-              .filter((f) => f.category === activeCategory)
-              .map((faq, i) => (
-                <AccordionItem key={i} value={`item-${i}`} className="border-b border-white/10 animate-fade-in" style={{ animationDelay: `${0.07 * i + .23}s` }}>
-                  <AccordionTrigger className="text-white text-lg">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-white/70">{faq.answer}</AccordionContent>
-                </AccordionItem>
-              ))}
-          </Accordion>
-          {/* How to get started extra content */}
-          <div className="mt-10 bg-midnight/60 border border-gold/20 rounded-lg p-6 animate-fade-in" style={{ animationDelay: ".6s" }}>
-            <div className="font-bold text-gold text-lg mb-2">{extraContent.title}</div>
-            <p className="text-white/80 whitespace-pre-line">{extraContent.desc}</p>
-          </div>
-          <div className="mt-12 text-center animate-fade-in" style={{ animationDelay: ".7s" }}>
-            <p className="text-white/70 mb-2">Still have questions?</p>
-            <Button asChild variant="outline" className="border-gold text-gold font-semibold px-8 py-3 rounded-lg hover:bg-gold/10 animate-scale-in">
-              <a href="/contact">Let’s talk</a>
-            </Button>
+        </div>
+
+        {/* FAQ content section */}
+        <section className="container mx-auto px-4 py-16 relative z-10 max-w-5xl">
+          <div className="grid grid-cols-12 gap-8">
+            {/* Left sidebar with links and image */}
+            <div className="col-span-12 lg:col-span-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <div className="bg-charcoal/60 backdrop-blur-sm border border-gold/10 rounded-2xl p-6 mb-8 sticky top-24">
+                <h3 className="font-bold text-xl text-gold mb-4">Browse Categories</h3>
+                <ul className="space-y-2">
+                  {faqCategories.map(({ category }) => (
+                    <li key={category}>
+                      <button
+                        onClick={() => {setActiveCategory(category); setSearchQuery("");}}
+                        className={`flex items-center w-full py-3 px-4 rounded-lg transition-all ${
+                          activeCategory === category && !searchQuery
+                            ? "bg-gold text-jet font-semibold shadow-glow-sm"
+                            : "hover:bg-gold/10 text-white/90"
+                        }`}
+                      >
+                        <ChevronRight className={`w-4 h-4 mr-2 ${activeCategory === category && !searchQuery ? "text-jet" : "text-gold"}`} />
+                        {category}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="relative overflow-hidden rounded-2xl animate-fade-in" style={{ animationDelay: "0.5s" }}>
+                <img 
+                  src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" 
+                  alt="Trading Success" 
+                  className="w-full h-72 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-white font-bold text-xl mb-2">Still have questions?</h3>
+                  <p className="text-white/70 mb-4">Our team is ready to assist with any questions not covered in our FAQ</p>
+                  <Button asChild className="bg-gold hover:bg-gold/90 text-jet w-full">
+                    <a href="/contact">Contact Us</a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            {/* Main content with FAQs */}
+            <div className="col-span-12 lg:col-span-8">
+              {searchQuery ? (
+                <div className="mb-8 animate-fade-in">
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    Search Results: <span className="text-gold">{searchQuery}</span>
+                  </h2>
+                  <p className="text-white/70">
+                    Found {filteredFaqs.length} {filteredFaqs.length === 1 ? 'result' : 'results'}
+                  </p>
+                </div>
+              ) : (
+                <div className="mb-8 animate-fade-in">
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    <span className="text-gold">{activeCategory}</span> Questions
+                  </h2>
+                  <p className="text-white/70">
+                    Everything you need to know about our {activeCategory.toLowerCase()} offerings
+                  </p>
+                </div>
+              )}
+              
+              <Accordion type="single" collapsible className="space-y-4">
+                {filteredFaqs.length > 0 ? (
+                  filteredFaqs.map((faq, i) => (
+                    <AccordionItem 
+                      key={i} 
+                      value={`item-${i}`} 
+                      className="bg-charcoal/50 backdrop-blur-sm border border-gold/10 rounded-xl overflow-hidden animate-fade-in"
+                      style={{ animationDelay: `${0.1 * i + 0.6}s` }}
+                    >
+                      <AccordionTrigger className="px-6 py-5 text-lg font-medium text-white hover:bg-gold/5 hover:no-underline">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="px-6 pb-5 text-white/80 leading-relaxed">
+                        <div className="border-l-2 border-gold pl-4 py-2">{faq.answer}</div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))
+                ) : (
+                  <div className="text-center py-16 text-white/70 animate-fade-in">
+                    <HelpCircle className="w-12 h-12 mx-auto mb-4 text-gold/50" />
+                    <h3 className="text-xl font-medium mb-2">No Questions Found</h3>
+                    <p>Try adjusting your search or browse by category</p>
+                  </div>
+                )}
+              </Accordion>
+              
+              {/* How to get started card */}
+              {!searchQuery && (
+                <div className="mt-10 bg-gradient-to-r from-gold/10 to-gold/5 backdrop-blur-sm border border-gold/20 rounded-xl p-8 animate-fade-in" style={{ animationDelay: "1s" }}>
+                  <div className="flex items-center mb-4">
+                    <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center mr-4">
+                      <ChevronRight className="w-6 h-6 text-gold" />
+                    </div>
+                    <h3 className="font-bold text-xl text-gold">{extraContent.title}</h3>
+                  </div>
+                  <p className="text-white/80 whitespace-pre-line pl-14">{extraContent.desc}</p>
+                </div>
+              )}
+            </div>
           </div>
         </section>
       </main>
@@ -127,4 +232,5 @@ const FAQPage = () => {
     </>
   );
 };
+
 export default FAQPage;
