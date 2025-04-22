@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { TrendingUp, Users, Award, ArrowRight } from "lucide-react";
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
-      {/* Background elements with adjusted position and z-index */}
+      {/* Background elements with adjusted position */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full" style={{ zIndex: 0 }}>
         <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gold/5 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-gold/10 rounded-full filter blur-3xl"></div>
@@ -43,21 +42,21 @@ const HeroSection = () => {
             </Button>
           </div>
           
-          {/* Stats - ensured high z-index and adjusted layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in relative" style={{ animationDelay: "0.4s", zIndex: 30 }}>
-            <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6 relative">
+          {/* Stats - Adjusted layout and positioning */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in relative" style={{ animationDelay: "0.4s" }}>
+            <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6">
               <TrendingUp className="w-8 h-8 text-gold mb-4 mx-auto" />
               <h3 className="text-2xl md:text-3xl font-bold mb-1">94%</h3>
               <p className="text-white/70">Member Profitability</p>
             </div>
             
-            <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6 relative">
+            <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6">
               <Users className="w-8 h-8 text-gold mb-4 mx-auto" />
               <h3 className="text-2xl md:text-3xl font-bold mb-1">5,000+</h3>
               <p className="text-white/70">Active Members</p>
             </div>
             
-            <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6 relative">
+            <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6 relative z-50">
               <Award className="w-8 h-8 text-gold mb-4 mx-auto" />
               <h3 className="text-2xl md:text-3xl font-bold mb-1">7+ Years</h3>
               <p className="text-white/70">Market Excellence</p>

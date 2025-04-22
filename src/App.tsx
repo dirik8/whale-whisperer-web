@@ -14,6 +14,7 @@ import ContactPage from "./pages/ContactPage";
 import FAQPage from "./pages/FAQPage";
 import EducationHubPage from "./pages/EducationHubPage";
 import CoachingPage from "./pages/CoachingPage";
+import VIPUniversityPage from "./pages/VIPUniversityPage";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/programs" element={<ProgramsPage />} />
+          <Route path="/programs/vip-university" element={<VIPUniversityPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/apply" element={<ApplicationPage />} />
           <Route path="/team" element={<TeamPage />} />
