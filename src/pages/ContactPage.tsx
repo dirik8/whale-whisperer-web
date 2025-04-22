@@ -80,7 +80,7 @@ const ContactPage = () => {
         location: values.location || "Not provided",
         portfolio_size: values.portfolioSize || "Not provided",
         investment_budget: values.investmentBudget || "Not provided",
-        assets_held: values.assetsHeld?.join(", ") || "Not provided",
+        assets_held: values.assetsHeld?.join(", ") || "Not provided"
       };
       
       // Replace with your actual EmailJS service ID, template ID, and public key
@@ -94,7 +94,7 @@ const ContactPage = () => {
       // Show success toast
       toast({
         title: "Message Sent Successfully",
-        description: "We'll get back to you within 24 hours.",
+        description: "We'll get back to you within 24 hours."
       });
       
       // Reset form and show thank you state
@@ -104,7 +104,7 @@ const ContactPage = () => {
       toast({
         title: "Error",
         description: "There was an error sending your message. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     }
   };
