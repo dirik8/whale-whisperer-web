@@ -17,11 +17,12 @@ const FeaturedVideoSection = () => {
         <div className="max-w-4xl mx-auto mt-12">
           <div className="relative pb-[56.25%] h-0 rounded-xl overflow-hidden border-2 border-gold/20">
             <iframe 
-              src="https://player.vimeo.com/video/1061743850?title=0&byline=0&portrait=0"
+              src="https://player.vimeo.com/video/1061743850?h=6296138655&badge=0&autopause=0&player_id=0&app_id=58479"
               className="absolute top-0 left-0 w-full h-full"
               frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               allowFullScreen
+              title="Client Testimonials"
             ></iframe>
           </div>
           
@@ -32,6 +33,9 @@ const FeaturedVideoSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Add script for Vimeo player */}
+      <script src="https://player.vimeo.com/api/player.js" async></script>
     </section>
   );
 };

@@ -7,7 +7,7 @@ import { TrendingUp, Users, Award, ArrowRight } from "lucide-react";
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
-      {/* Background elements */}
+      {/* Background elements - adjusted positioning and z-index */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full z-0">
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-gold/5 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-gold/10 rounded-full filter blur-3xl"></div>
@@ -31,8 +31,8 @@ const HeroSection = () => {
             Elite Strategies. Exclusive Access. Ultimate Performance.
           </p>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+          {/* CTA Buttons - increased z-index to ensure they're clickable */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16 animate-fade-in relative z-20" style={{ animationDelay: "0.3s" }}>
             <Button asChild className="bg-gradient-gold hover:bg-gold text-jet font-medium px-8 py-6 text-lg hover:scale-105 transition-transform duration-300">
               <Link to="/apply">Apply for Membership</Link>
             </Button>
@@ -43,8 +43,8 @@ const HeroSection = () => {
             </Button>
           </div>
           
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+          {/* Stats - increased z-index */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in relative z-20" style={{ animationDelay: "0.4s" }}>
             <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6">
               <TrendingUp className="w-8 h-8 text-gold mb-4 mx-auto" />
               <h3 className="text-2xl md:text-3xl font-bold mb-1">94%</h3>
