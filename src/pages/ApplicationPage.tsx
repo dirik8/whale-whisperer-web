@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -5,65 +6,45 @@ import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { MapPin, Mail, Phone, Clock, MessageSquare } from "lucide-react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Mail, Phone, MessageSquare } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Helmet } from "react-helmet-async";
 
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
+// Schema for Contact form (from previous ContactPage)
+const contactFormSchema = z.object({
+  firstName: z.string().min(2, { message: "First name must be at least 2 characters" }),
+  lastName: z.string().min(2, { message: "Last name must be at least 2 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   phone: z.string().optional(),
-  age: z.string().optional(),
-  occupation: z.string().optional(),
-  maritalStatus: z.string().optional(),
-  currentJob: z.string().optional(),
-  company: z.string().optional(),
-  previousInvestments: z.string().optional(),
-  broker: z.string().optional(),
-  location: z.string().optional(),
-  portfolioSize: z.string().optional(),
-  investmentBudget: z.string().optional(),
-  assetsHeld: z.string().array().optional(),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  message: z.string().min(10, { message: "Please provide a message of at least 10 characters" }),
 });
 
 const ApplicationPage = () => {
   const { toast } = useToast();
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+
+  const form = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
-      age: "",
-      occupation: "",
-      maritalStatus: "",
-      currentJob: "",
-      company: "",
-      previousInvestments: "",
-      broker: "",
-      location: "",
-      portfolioSize: "",
-      investmentBudget: "",
-      assetsHeld: [],
       message: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log('Form submitted:', values);
+  const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
+    console.log("Contact form submitted:", values);
     toast({
       title: "Message Sent Successfully",
-      description: "We'll get back to you within 24 hours."
+      description: "We'll get back to you within 24 hours.",
     });
     setFormSubmitted(true);
   };
@@ -88,7 +69,7 @@ const ApplicationPage = () => {
             </p>
           </div>
         </section>
-        {/* Contact Form */}
+        {/* Contact Form (originated from ContactPage) */}
         <section className="container mx-auto px-4 py-8">
           <div className="max-w-3xl mx-auto">
             <SectionHeading
@@ -130,13 +111,13 @@ const ApplicationPage = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
-                      name="name"
+                      name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/80">Full Name*</FormLabel>
+                          <FormLabel className="text-white/80">First Name*</FormLabel>
                           <FormControl>
-                            <Input 
-                              placeholder="Your full name" 
+                            <Input
+                              placeholder="Your first name"
                               className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
                               {...field}
                             />
@@ -147,14 +128,13 @@ const ApplicationPage = () => {
                     />
                     <FormField
                       control={form.control}
-                      name="email"
+                      name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/80">Email Address*</FormLabel>
+                          <FormLabel className="text-white/80">Last Name*</FormLabel>
                           <FormControl>
-                            <Input 
-                              placeholder="your@email.com" 
-                              type="email"
+                            <Input
+                              placeholder="Your last name"
                               className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
                               {...field}
                             />
@@ -164,6 +144,24 @@ const ApplicationPage = () => {
                       )}
                     />
                   </div>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white/80">Email Address*</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="your@email.com"
+                            className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <FormField
                     control={form.control}
                     name="phone"
@@ -171,259 +169,13 @@ const ApplicationPage = () => {
                       <FormItem>
                         <FormLabel className="text-white/80">Phone Number</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="+1 (234) 567-8900" 
+                          <Input
+                            placeholder="+1 (234) 567-8900"
                             className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
                             {...field}
                           />
                         </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="age"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80">Age</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Your age" 
-                              className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="occupation"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80">Occupation</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Your occupation" 
-                              className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <FormField
-                    control={form.control}
-                    name="maritalStatus"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <FormLabel className="text-white/80">Marital Status</FormLabel>
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            className="flex flex-wrap gap-4"
-                          >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="single" id="single" className="text-gold" />
-                              <Label htmlFor="single" className="text-white">Single</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="married" id="married" className="text-gold" />
-                              <Label htmlFor="married" className="text-white">Married</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="divorced" id="divorced" className="text-gold" />
-                              <Label htmlFor="divorced" className="text-white">Divorced</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="other" id="other" className="text-gold" />
-                              <Label htmlFor="other" className="text-white">Other</Label>
-                            </div>
-                          </RadioGroup>
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="currentJob"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80">Current Job</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Your job title" 
-                              className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="company"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80">Company</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Your company" 
-                              className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <FormField
-                    control={form.control}
-                    name="previousInvestments"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white/80">Previous Investments Experience</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger className="bg-jet/80 border border-gold/20 text-white focus:border-gold">
-                              <SelectValue placeholder="Select your experience level" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="none">No prior investment experience</SelectItem>
-                              <SelectItem value="beginner">Beginner (&lt; 1 year)</SelectItem>
-                              <SelectItem value="intermediate">Intermediate (1-3 years)</SelectItem>
-                              <SelectItem value="advanced">Advanced (3-5 years)</SelectItem>
-                              <SelectItem value="expert">Expert (5+ years)</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="broker"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white/80">Current/Past Broker</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Your broker" 
-                            className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="location"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white/80">Location</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="City, Country" 
-                            className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="portfolioSize"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80">Current Portfolio Size</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger className="bg-jet/80 border border-gold/20 text-white focus:border-gold">
-                                <SelectValue placeholder="Select portfolio size" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="under10k">Under $10,000</SelectItem>
-                                <SelectItem value="10k-50k">$10,000 - $50,000</SelectItem>
-                                <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                                <SelectItem value="100k-500k">$100,000 - $500,000</SelectItem>
-                                <SelectItem value="500k-1m">$500,000 - $1 million</SelectItem>
-                                <SelectItem value="over1m">Over $1 million</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="investmentBudget"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white/80">Current Investment Budget</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger className="bg-jet/80 border border-gold/20 text-white focus:border-gold">
-                                <SelectValue placeholder="Select investment budget" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="under5k">Under $5,000</SelectItem>
-                                <SelectItem value="5k-25k">$5,000 - $25,000</SelectItem>
-                                <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                                <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                                <SelectItem value="over100k">Over $100,000</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <FormField
-                    control={form.control}
-                    name="assetsHeld"
-                    render={() => (
-                      <FormItem>
-                        <FormLabel className="text-white/80">Assets Currently Held</FormLabel>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
-                          {["Stocks", "Bonds", "ETFs", "Crypto", "Real Estate", "Commodities"].map((asset) => (
-                            <div key={asset} className="flex items-center space-x-2">
-                              <input
-                                type="checkbox"
-                                id={asset.toLowerCase()}
-                                value={asset.toLowerCase()}
-                                onChange={(e) => {
-                                  const currentAssets = form.getValues("assetsHeld") || [];
-                                  if (e.target.checked) {
-                                    form.setValue("assetsHeld", [...currentAssets, asset.toLowerCase()]);
-                                  } else {
-                                    form.setValue(
-                                      "assetsHeld",
-                                      currentAssets.filter((a) => a !== asset.toLowerCase())
-                                    );
-                                  }
-                                }}
-                                className="h-4 w-4 rounded border-gold/50 text-gold focus:ring-gold/50"
-                              />
-                              <Label htmlFor={asset.toLowerCase()} className="text-white">{asset}</Label>
-                            </div>
-                          ))}
-                        </div>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
