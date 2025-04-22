@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -6,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { Mail, Phone, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,6 +23,8 @@ const contactFormSchema = z.object({
   phone: z.string().optional(),
   message: z.string().min(10, { message: "Please provide a message of at least 10 characters" }),
 });
+
+const heroImage = "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1100&q=80";
 
 const ContactPage = () => {
   const { toast } = useToast();
@@ -57,20 +58,43 @@ const ContactPage = () => {
         <link rel="canonical" href="https://bullishwhales.club/contact" />
       </Helmet>
       <Header />
-      <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-charcoal">
+      <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-charcoal relative">
+        {/* Hero background with image */}
+        <img
+          src={heroImage}
+          alt="Contact - Modern"
+          className="absolute top-0 left-0 w-full h-[380px] object-cover opacity-35 animate-fade-in"
+          style={{ zIndex: 0 }}
+        />
+        {/* Overlay */}
+        <div className="absolute top-0 left-0 w-full h-[380px] bg-gradient-to-b from-midnight/90 to-charcoal/50" style={{ zIndex: 1 }}></div>
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Get In <span className="gold-gradient">Touch</span>
-            </h1>
-            <p className="text-xl text-white/70 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              Have questions? Need guidance? Our team of trading experts is ready to assist you on your journey to trading success.
-            </p>
+        <section className="container mx-auto px-4 py-16 relative z-10 animate-fade-in">
+          <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex-1 text-center md:text-left">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                Get In <span className="gold-gradient">Touch</span>
+              </h1>
+              <p className="text-xl text-white/70 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+                Have questions? Need guidance? Our team of trading experts is ready to assist you on your journey to trading success.
+              </p>
+              <ul className="mb-6 text-white/80 space-y-2">
+                <li><span className="text-gold">•</span> Personalized answers from real traders</li>
+                <li><span className="text-gold">•</span> Fast response times (usually within hours)</li>
+                <li><span className="text-gold">•</span> 15+ years professional trading experience</li>
+              </ul>
+            </div>
+            <div className="flex-1 w-full flex justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=500&q=80"
+                alt="Contact lightbulb"
+                className="w-72 h-72 object-cover rounded-2xl shadow-xl ring-4 ring-gold/20 hover:scale-105 transition-transform duration-500 animate-fade-in"
+              />
+            </div>
           </div>
         </section>
         {/* Contact Form */}
-        <section className="container mx-auto px-4 py-8">
+        <section className="container mx-auto px-4 py-8 relative z-10">
           <div className="max-w-3xl mx-auto">
             <SectionHeading
               title="Let's Build Your Trading Future"
@@ -80,7 +104,7 @@ const ContactPage = () => {
             {formSubmitted ? (
               <div className="bg-gold/10 border border-gold/30 rounded-xl shadow-lg p-8 animate-fade-in">
                 <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gold/20 rounded-full mx-auto flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-gold/20 rounded-full mx-auto flex items-center justify-center mb-4 animate-bounce">
                     <MessageSquare className="w-8 h-8 text-gold" />
                   </div>
                   <h3 className="text-2xl font-bold text-white">Thanks for reaching out!</h3>

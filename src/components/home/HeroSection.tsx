@@ -1,16 +1,23 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Users, Award, ArrowRight } from "lucide-react";
 
+const heroBg = "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"; // Crypto/forex themed
+
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
-      {/* Background elements with adjusted position */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full" style={{ zIndex: 0 }}>
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gold/5 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-gold/10 rounded-full filter blur-3xl"></div>
-      </div>
+      {/* Animated background image related to crypto/forex */}
+      <img
+        src={heroBg}
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none animate-fade-in"
+        alt="Crypto hero"
+        style={{ zIndex: 0, maxHeight: 700, minHeight: 400 }}
+      />
+      {/* Background gradient overlays */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-midnight/80 to-charcoal/90" style={{ zIndex: 1 }}></div>
       
       <div className="container mx-auto relative" style={{ zIndex: 10 }}>
         <div className="max-w-4xl mx-auto text-center">
@@ -58,7 +65,7 @@ const HeroSection = () => {
             
             <div className="bg-charcoal/50 border border-gold/10 rounded-lg p-6 relative z-50">
               <Award className="w-8 h-8 text-gold mb-4 mx-auto" />
-              <h3 className="text-2xl md:text-3xl font-bold mb-1">7+ Years</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-1">15+ Years</h3>
               <p className="text-white/70">Market Excellence</p>
             </div>
           </div>

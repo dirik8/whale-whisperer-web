@@ -149,21 +149,7 @@ const EducationHubPage = () => {
                         <div className="text-gold/80 text-sm">{cls.category}</div>
                       </div>
                     </div>
-                    
-                    <p className="text-white/80 mb-6">{cls.description}</p>
-
-                    <div className="relative h-2 w-full bg-charcoal/30 rounded-full mb-3 overflow-hidden">
-                      <div 
-                        style={{ width: `${cls.progress}%` }} 
-                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-gold to-light-gold rounded-full transition-all duration-1000 ease-out"
-                      ></div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="text-white/80 text-sm mb-4">Progress: {cls.progress}%</div>
-                      {cls.progress === 100 && (
-                        <span className="text-gold text-sm font-medium">Completed</span>
-                      )}
-                    </div>
+                    <p className="text-white/80 mb-8">{cls.description}</p>
                     <Button variant="outline" className="w-full border-gold text-gold hover:bg-gold/10 transition-all duration-300 rounded-lg font-bold">
                       {cls.progress > 0 ? "Continue Learning" : "Start Course"}
                     </Button>

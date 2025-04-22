@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -7,12 +6,8 @@ import SectionHeading from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import {
-  CheckCircle2,
-  CircleDashed,
-  ArrowRight,
   CheckCheck,
-  Clock,
-  MessageSquare,
+  Clock
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import {
@@ -57,6 +52,8 @@ const applicationFormSchema = z.object({
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
+const heroImage = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1100&q=80";
+
 const ApplicationPage = () => {
   const { toast } = useToast();
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -99,21 +96,41 @@ const ApplicationPage = () => {
         <link rel="canonical" href="https://bullishwhales.club/apply" />
       </Helmet>
       <Header />
-      <main className="min-h-screen pt-24">
-        <section className="py-20 px-4 bg-midnight">
-          <div className="container mx-auto">
-            <div className="max-w-4xl">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+      <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-charcoal relative">
+        <img
+          src={heroImage}
+          alt="Application - Trading Desk"
+          className="absolute top-0 left-0 w-full h-[410px] object-cover opacity-30 animate-fade-in"
+          style={{ zIndex: 0 }}
+        />
+        <div className="absolute top-0 left-0 w-full h-[410px] bg-gradient-to-b from-midnight/90 to-charcoal/60" style={{ zIndex: 1 }}></div>
+        <section className="container mx-auto px-4 py-16 relative z-10 animate-fade-in">
+          <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex-1 text-center md:text-left">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                 Apply for Access to Our <span className="gold-gradient">Elite Trading Circle</span>
               </h1>
-              <p className="text-xl text-white/70 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <p className="text-xl text-white/70 mb-8">
+                <span className="bg-gold/10 text-gold px-3 py-1 mr-2 rounded-full font-semibold shadow animate-pulse">15+ years</span>
                 Only 50 traders accepted per quarter. Are you next?
               </p>
+              <ul className="mb-6 text-white/80 space-y-2">
+                <li><span className="text-gold">•</span> Personalized onboarding with senior traders</li>
+                <li><span className="text-gold">•</span> Private Discord access & live calls</li>
+                <li><span className="text-gold">•</span> 100% transparent strategy breakdowns</li>
+              </ul>
+            </div>
+            <div className="flex-1 w-full flex justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80"
+                alt="Application modern"
+                className="w-72 h-72 object-cover rounded-2xl shadow-lg ring-4 ring-gold/20 hover:scale-105 transition-transform duration-500 animate-fade-in"
+              />
             </div>
           </div>
         </section>
 
-        <section className="py-20 px-4 bg-jet">
+        <section className="py-16 px-4 bg-jet/80 relative z-10">
           <div className="container mx-auto">
             <div className="mb-10">
               <SectionHeading
@@ -122,8 +139,8 @@ const ApplicationPage = () => {
               />
             </div>
             {formSubmitted ? (
-              <div className="max-w-2xl mx-auto text-center">
-                <div className="w-24 h-24 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-8">
+              <div className="max-w-2xl mx-auto text-center animate-fade-in">
+                <div className="w-24 h-24 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
                   <CheckCheck className="w-14 h-14 text-gold" />
                 </div>
                 <h2 className="text-4xl font-bold mb-6 gold-gradient">Application Received!</h2>

@@ -12,6 +12,10 @@ const faqCategories = [
   { category: "Coaching" },
   { category: "Tech" },
 ];
+
+// Sample Unsplash crypto image for style
+const faqHeroImage = "https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&w=1100&q=80";
+
 const faqs = [
   {
     category: "Membership",
@@ -65,21 +69,30 @@ const FAQPage = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-24 bg-gradient-to-br from-charcoal to-midnight">
-        <section className="container mx-auto px-4 max-w-3xl py-16">
+      <main className="min-h-screen pt-24 bg-gradient-to-br from-charcoal to-midnight relative">
+        {/* Crypto/Finance attention-grabbing background image */}
+        <img
+          src={faqHeroImage}
+          alt="FAQ skyscraper"
+          className="absolute top-0 left-0 w-full h-[320px] object-cover opacity-40 animate-fade-in"
+          style={{ zIndex: 0 }}
+        />
+        {/* Overlay */}
+        <div className="absolute top-0 left-0 w-full h-[320px] bg-gradient-to-b from-charcoal/85 to-midnight/70" style={{ zIndex: 1 }}></div>
+        <section className="container mx-auto px-4 max-w-3xl py-16 relative z-10">
           <SectionHeading
             title="Straight Answers. No Fluff."
             subtitle="Your biggest questions on membership, coaching, and more—answered."
             align="center"
           />
-          <div className="flex gap-2 mb-6 justify-center">
+          <div className="flex gap-2 mb-6 justify-center animate-fade-in" style={{ animationDelay: ".15s" }}>
             {faqCategories.map(({ category }) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-md font-semibold transition border ${
+                className={`px-4 py-2 rounded-md font-semibold transition-all border ${
                   activeCategory === category
-                    ? "bg-gold text-jet border-gold shadow-md"
+                    ? "bg-gold text-jet border-gold shadow-md animate-pulse"
                     : "bg-charcoal text-white/80 border-gold/20 hover:bg-gold/10"
                 }`}
               >
@@ -87,24 +100,24 @@ const FAQPage = () => {
               </button>
             ))}
           </div>
-          <Accordion type="single" collapsible>
+          <Accordion type="single" collapsible className="animate-fade-in" style={{ animationDelay: ".18s" }}>
             {faqs
               .filter((f) => f.category === activeCategory)
               .map((faq, i) => (
-                <AccordionItem key={i} value={`item-${i}`} className="border-b border-white/10">
+                <AccordionItem key={i} value={`item-${i}`} className="border-b border-white/10 animate-fade-in" style={{ animationDelay: `${0.07 * i + .23}s` }}>
                   <AccordionTrigger className="text-white text-lg">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-white/70">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
           </Accordion>
           {/* How to get started extra content */}
-          <div className="mt-10 bg-midnight/60 border border-gold/20 rounded-lg p-6">
+          <div className="mt-10 bg-midnight/60 border border-gold/20 rounded-lg p-6 animate-fade-in" style={{ animationDelay: ".6s" }}>
             <div className="font-bold text-gold text-lg mb-2">{extraContent.title}</div>
             <p className="text-white/80 whitespace-pre-line">{extraContent.desc}</p>
           </div>
-          <div className="mt-12 text-center">
+          <div className="mt-12 text-center animate-fade-in" style={{ animationDelay: ".7s" }}>
             <p className="text-white/70 mb-2">Still have questions?</p>
-            <Button asChild variant="outline" className="border-gold text-gold font-semibold px-8 py-3 rounded-lg hover:bg-gold/10">
+            <Button asChild variant="outline" className="border-gold text-gold font-semibold px-8 py-3 rounded-lg hover:bg-gold/10 animate-scale-in">
               <a href="/contact">Let’s talk</a>
             </Button>
           </div>
