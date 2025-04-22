@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -11,27 +10,27 @@ import { TrendingUp, Target, Lock, BarChart3 } from "lucide-react";
 const AboutPage = () => {
   const milestones = [
     {
-      year: "2016",
+      year: "2017",
       title: "The Beginning",
       description: "Left CPA career to pursue trading full-time after 200% returns in personal portfolio."
     },
     {
-      year: "2018",
+      year: "2019",
       title: "First Mentorship",
       description: "Started coaching 5 traders who all achieved profitability within 90 days."
     },
     {
-      year: "2019",
+      year: "2020",
       title: "Trading System Development",
       description: "Developed the proprietary BWC Trading Framework now used by thousands."
     },
     {
-      year: "2021",
+      year: "2022",
       title: "Community Launch",
       description: "Officially launched Bullish Whales Club with 100 founding members."
     },
     {
-      year: "2023",
+      year: "2024",
       title: "Global Expansion",
       description: "Expanded to serve 5,000+ traders across 60+ countries worldwide."
     }
