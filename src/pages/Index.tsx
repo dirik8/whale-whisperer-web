@@ -8,6 +8,7 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import ProgramsSection from "@/components/home/ProgramsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
+import FeaturedVideoSection from "@/components/home/FeaturedVideoSection";
 
 const Index = () => {
   return (
@@ -17,6 +18,7 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <FeaturesSection />
+        <FeaturedVideoSection />
         <ProgramsSection />
         <TestimonialsSection />
         <CTASection />
