@@ -63,6 +63,7 @@ const WrittenTestimonialsSection = () => {
                 author={testimonial.author}
                 role={testimonial.role}
                 image={testimonial.image}
+                showAuthor={false}
               />
             </div>
           ))}

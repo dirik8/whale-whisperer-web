@@ -5,10 +5,11 @@ import { Quote } from "lucide-react";
 
 interface TestimonialCardProps {
   quote: string;
-  author: string;
+  author?: string;
   role?: string;
   image?: string;
   className?: string;
+  showAuthor?: boolean;
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
@@ -17,6 +18,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   role,
   image,
   className,
+  showAuthor = false,
 }) => {
   return (
     <div className={cn(
@@ -25,17 +27,19 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     )}>
       <Quote className="w-8 h-8 text-gold opacity-50 mb-4" />
       <p className="text-white/80 text-lg mb-6 italic">{quote}</p>
-      <div className="flex items-center">
-        {image && (
-          <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border border-gold/20">
-            <img src={image} alt={author} className="w-full h-full object-cover" />
+      {showAuthor && author && (
+        <div className="flex items-center">
+          {image && (
+            <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border border-gold/20">
+              <img src={image} alt={author} className="w-full h-full object-cover" />
+            </div>
+          )}
+          <div>
+            <h4 className="text-white font-medium">{author}</h4>
+            {role && <p className="text-white/60 text-sm">{role}</p>}
           </div>
-        )}
-        <div>
-          <h4 className="text-white font-medium">{author}</h4>
-          {role && <p className="text-white/60 text-sm">{role}</p>}
         </div>
-      </div>
+      )}
     </div>
   );
 };

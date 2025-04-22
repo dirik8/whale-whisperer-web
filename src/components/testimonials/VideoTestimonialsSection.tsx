@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import SectionHeading from "@/components/ui/section-heading";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { videoTestimonials } from "@/utils/testimonial-videos";
@@ -47,28 +46,15 @@ const VideoTestimonialsSection = () => {
                 
                 <div className="p-4 bg-charcoal/50 border border-gold/10">
                   <h3 className="text-xl font-bold text-white mb-2">{testimonial.title}</h3>
-                  <p className="text-white/70 text-sm mb-4">{testimonial.description}</p>
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gold/20">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name} 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <h4 className="font-medium text-white">{testimonial.name}</h4>
-                      <p className="text-sm text-white/60">{testimonial.role}</p>
-                    </div>
-                  </div>
+                  <p className="text-white/70 text-sm">{testimonial.description}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Pagination */}
-        <div className="mt-12">
+        {/* Pagination with fixed UI */}
+        <div className="mt-12 relative z-10">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
