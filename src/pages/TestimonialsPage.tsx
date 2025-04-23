@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -8,12 +9,24 @@ import VideoTestimonialsSection from "@/components/testimonials/VideoTestimonial
 import WrittenTestimonialsSection from "@/components/testimonials/WrittenTestimonialsSection";
 import FeaturedTransformationSection from "@/components/testimonials/FeaturedTransformationSection";
 import StatsSection from "@/components/testimonials/StatsSection";
+import UrgencyBanner from "@/components/application/UrgencyBanner";
 
 const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // Bull image
 
 const TestimonialsPage = () => {
   return (
     <>
+      <Helmet>
+        <title>Trader Testimonials | Bullish Whales Club Success Stories</title>
+        <meta name="description" content="Read real success stories from Bullish Whales Club members who transformed their trading performance. See how our strategies have helped thousands of traders." />
+        <meta name="keywords" content="trading testimonials, crypto success stories, trader transformation, bullish whales results, trading community reviews" />
+        <meta property="og:title" content="Trader Testimonials | Bullish Whales Club Success Stories" />
+        <meta property="og:description" content="Read real success stories from Bullish Whales Club members who transformed their trading performance. See how our strategies have helped thousands of traders." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bullishwhales.club/testimonials" />
+        <meta property="og:image" content={heroBg} />
+        <link rel="canonical" href="https://bullishwhales.club/testimonials" />
+      </Helmet>
       <Header />
       <main className="min-h-screen pt-24">
         {/* Hero Section */}
@@ -22,7 +35,7 @@ const TestimonialsPage = () => {
           <div className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 0 }}>
             <img
               src={heroBg}
-              className="w-full h-full object-contain mx-auto opacity-40 pointer-events-none animate-fade-in"
+              className="w-full h-screen object-cover mx-auto opacity-40 pointer-events-none animate-fade-in"
               alt="Crypto bull"
             />
           </div>
@@ -41,6 +54,8 @@ const TestimonialsPage = () => {
             </div>
           </div>
         </section>
+        
+        <UrgencyBanner />
         
         <VideoTestimonialsSection />
         <WrittenTestimonialsSection />

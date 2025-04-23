@@ -1,5 +1,5 @@
-
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Star, Users, BookOpen } from "lucide-react";
 import UrgencyTimer from "@/components/ui/urgency-timer";
 import { Clock } from "lucide-react";
+import UrgencyBanner from "@/components/application/UrgencyBanner";
 
 const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // Bull image
 
@@ -262,11 +263,33 @@ const successProfiles = [
     after: "$60K in 8 months, built children's library, expanded workshops.",
     quote: "BWC helped me fund what the world needs most.",
     icons: ["🎵 TikTok Live", "❤️ NGO Work", "💵 $60K", "📚 Library Built"]
+  },
+  {
+    name: "Julian",
+    age: "35",
+    role: "Former Day Trader",
+    discovery: "Discovered via YouTube recommendation",
+    before: "Struggled with inconsistent returns, psychological barriers, and poor risk management.",
+    turning: "Found BWC through algorithm recommendation, joined premium mentorship program.",
+    after: "$1.2M in one year, opened trading academy for disadvantaged youth.",
+    quote: "I went from barely surviving to truly thriving. BWC transformed not just my account, but my entire mindset.",
+    icons: ["📺 YouTube", "🧠 Psychology", "💵 $1.2M", "🎓 Education"]
   }
 ];
 
 const CoachingPage = () => (
   <>
+    <Helmet>
+      <title>Elite Trading Coaching | Bullish Whales Club Mentorship Program</title>
+      <meta name="description" content="Transform your trading with personalized coaching from Bullish Whales Club. Our elite mentors help you develop strategies, mindset and execution for consistent profits." />
+      <meta name="keywords" content="trading coaching, crypto mentorship, trading psychology, professional trading, trading success stories" />
+      <meta property="og:title" content="Elite Trading Coaching | Bullish Whales Club Mentorship Program" />
+      <meta property="og:description" content="Transform your trading with personalized coaching from Bullish Whales Club. Our elite mentors help you develop strategies, mindset and execution for consistent profits." />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://bullishwhales.club/coaching" />
+      <meta property="og:image" content={heroBg} />
+      <link rel="canonical" href="https://bullishwhales.club/coaching" />
+    </Helmet>
     <Header />
     <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-jet">
       {/* Hero Section with Background */}
@@ -275,7 +298,7 @@ const CoachingPage = () => (
         <div className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 0 }}>
           <img
             src={heroBg}
-            className="w-full h-full object-contain mx-auto opacity-40 pointer-events-none animate-fade-in"
+            className="w-full h-screen object-cover mx-auto opacity-40 pointer-events-none animate-fade-in"
             alt="Crypto bull"
           />
         </div>
@@ -301,6 +324,8 @@ const CoachingPage = () => (
           </div>
         </div>
       </section>
+      
+      <UrgencyBanner />
 
       <section className="container mx-auto px-4 py-12">
         <SectionHeading
