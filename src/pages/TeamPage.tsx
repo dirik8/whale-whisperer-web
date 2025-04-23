@@ -2,9 +2,12 @@ import React from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionHeading from "@/components/ui/section-heading";
-import { Users, Star, Book, MapPin, Mail, Phone } from "lucide-react";
+import { Users, Star, Book } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import HeroBackground from "@/components/ui/HeroBackground";
+
+const heroImage = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png";
 
 const teamMembers = [
   {
@@ -194,14 +197,16 @@ const testimonial = {
 const TeamPage = () => (
   <>
     <Header />
-    <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight via-charcoal to-jet">
-      {/* Hero Section */}
+    <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight via-charcoal to-jet relative">
       <section className="container mx-auto px-4 py-16 relative">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+        <div className="absolute inset-0">
+          <HeroBackground image={heroImage} brightness={0.35} />
+        </div>
+        <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 gold-gradient drop-shadow animate-fade-in">
             Meet Our <span className="gold-gradient">Elite Team</span>
           </h1>
-          <p className="text-xl text-white/70 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <p className="text-xl text-white/80 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             Strategists, mentors, and visionaries forging tomorrow's elite traders through proven strategies and dedicated support.
           </p>
           <div className="flex justify-center gap-3">
@@ -211,7 +216,6 @@ const TeamPage = () => (
           </div>
         </div>
         
-        {/* Team grid */}
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-10">
             {teamMembers.map((member, idx) => (
@@ -250,7 +254,6 @@ const TeamPage = () => (
           </div>
         </div>
         
-        {/* Team's Values */}
         <div className="mt-20 mb-16">
           <SectionHeading
             title="Our Core Values"
@@ -285,12 +288,10 @@ const TeamPage = () => (
           </div>
         </div>
         
-        {/* Divider */}
         <div className="my-12 flex justify-center">
           <div className="w-24 h-1 bg-gradient-gold rounded-full"></div>
         </div>
         
-        {/* Testimonial card */}
         <div className="max-w-xl mx-auto bg-charcoal/80 border border-gold/30 p-8 rounded-2xl shadow-xl mb-16 animate-fade-in">
           <div className="flex items-center justify-center mb-2">
             <Star className="text-gold mr-2" /> <span className="font-semibold text-gold">Member Story</span>
@@ -300,7 +301,6 @@ const TeamPage = () => (
           <div className="text-white/60 text-xs text-center">{testimonial.bio}</div>
         </div>
         
-        {/* CTA */}
         <div className="mt-4 flex justify-center">
           <Button asChild className="bg-gradient-gold text-jet text-lg font-medium px-8 py-4 rounded-lg hover:scale-105 transition">
             <Link to="/apply">Apply to Join Our Team</Link>

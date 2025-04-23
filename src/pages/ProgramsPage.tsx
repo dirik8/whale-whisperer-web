@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -13,6 +12,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import UrgencyBanner from "@/components/application/UrgencyBanner";
+import HeroBackground from "@/components/ui/HeroBackground";
+
+const heroImage = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png";
 
 const ProgramsPage = () => {
   const tiers = [
@@ -99,18 +102,22 @@ const ProgramsPage = () => {
       <Header />
       <main className="min-h-screen pt-24">
         {/* Hero Section */}
-        <section className="py-20 px-4 bg-midnight">
-          <div className="container mx-auto">
+        <section className="py-20 px-4 bg-midnight relative overflow-hidden h-[450px]">
+          <div className="absolute inset-0">
+            <HeroBackground image={heroImage} brightness={0.38} />
+          </div>
+          <div className="container mx-auto relative z-10">
             <div className="max-w-4xl">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 gold-gradient drop-shadow animate-fade-in">
                 Choose a Membership That <span className="gold-gradient">Matches Your Ambition</span>
               </h1>
-              <p className="text-xl text-white/70 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <p className="text-xl text-white/80 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
                 We offer tiered programs designed to meet you at your current level and elevate your trading performance.
               </p>
             </div>
           </div>
         </section>
+        <UrgencyBanner />
         
         {/* Program Tiers */}
         <section className="py-20 px-4 bg-jet">

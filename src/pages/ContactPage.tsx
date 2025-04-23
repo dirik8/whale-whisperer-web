@@ -8,6 +8,7 @@ import ContactHero from "@/components/contact/ContactHero";
 import ContactFormContainer from "@/components/contact/ContactFormContainer";
 import ContactInfoSidebar from "@/components/contact/ContactInfoSidebar";
 import UrgencyBanner from "@/components/application/UrgencyBanner";
+import HeroBackground from "@/components/ui/HeroBackground";
 
 // Bull image
 const heroImage = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png";
@@ -28,25 +29,17 @@ const ContactPage = () => {
       </Helmet>
       <Header />
       <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight to-charcoal relative">
-        {/* Hero background image */}
-        <img
-          src={heroImage}
-          alt="Contact - Trading Desk"
-          className="absolute top-0 left-0 w-full h-screen object-cover opacity-30 animate-fade-in"
-          style={{ zIndex: 0 }}
-        />
-        <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-midnight/90 to-charcoal/60" style={{ zIndex: 1 }}></div>
-        
-        {/* Hero Section */}
-        <ContactHero heroImage={heroImage} />
-        
+        <section className="relative h-[480px] overflow-hidden">
+          <HeroBackground image={heroImage} brightness={0.38} />
+          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center pt-20">
+            <ContactHero heroImage={heroImage} />
+          </div>
+        </section>
         {/* Urgency Banner */}
         <UrgencyBanner />
-        
         {/* Contact Form with Sidebars */}
         <section className="container mx-auto px-4 py-8 pb-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Left Sidebar */}
             <div className="lg:col-span-3 animate-fade-in" style={{ animationDelay: "0.2s" }}>
               <SidebarContent
                 title="Trading Insights"
@@ -63,13 +56,9 @@ const ContactPage = () => {
                 ctaLink="/community"
               />
             </div>
-            
-            {/* Main Content - Contact Form */}
             <div className="lg:col-span-6">
               <ContactFormContainer />
             </div>
-            
-            {/* Right Sidebar */}
             <div className="lg:col-span-3 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <ContactInfoSidebar />
             </div>
