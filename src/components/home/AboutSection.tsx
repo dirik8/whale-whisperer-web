@@ -13,8 +13,8 @@ const AboutSection = () => {
           <div className="relative animate-fade-in" style={{ animationDelay: "0.1s" }}>
             <div className="aspect-[4/5] relative z-10 mb-16">
               <img 
-                src="https://images.unsplash.com/photo-1500673922987-e212871fec22" 
-                alt="Founder of Bullish Whales Club" 
+                src="https://images.unsplash.com/photo-1642790551116-304f69b19ce4?auto=format&fit=crop&q=80&w=2500" 
+                alt="Trading charts and performance" 
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
@@ -22,7 +22,7 @@ const AboutSection = () => {
             
             {/* Experience badge */}
             <div className="absolute -bottom-6 -left-6 bg-gold text-jet font-bold py-3 px-6 rounded-lg z-20">
-              7+ Years Trading Experience
+              7+ Years Trading Excellence
             </div>
           </div>
           

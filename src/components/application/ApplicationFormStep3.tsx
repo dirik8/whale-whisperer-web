@@ -1,125 +1,258 @@
 
-import React from "react";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import React, { useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { UseFormReturn } from "react-hook-form";
-import { ApplicationFormValues } from "@/types/application";
+import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
+
+const formSchema = z.object({
+  assetsHeld: z.array(z.string()).min(1, "Please select at least one asset type"),
+  message: z.string().optional(),
+  termsAccepted: z.boolean().refine((val) => val === true, {
+    message: "You must accept the terms and conditions to proceed",
+  }),
+});
+
+type FormStep3Values = z.infer<typeof formSchema>;
 
 type ApplicationFormStep3Props = {
-  form: UseFormReturn<ApplicationFormValues>;
+  onBack: () => void;
+  onSubmit: (data: FormStep3Values) => void;
+  formData: any;
 };
 
-const ApplicationFormStep3: React.FC<ApplicationFormStep3Props> = ({ form }) => {
+const assetOptions = [
+  { id: "stocks", label: "Stocks" },
+  { id: "crypto", label: "Cryptocurrency" },
+  { id: "forex", label: "Forex" },
+  { id: "commodities", label: "Commodities" },
+  { id: "bonds", label: "Bonds" },
+  { id: "real estate", label: "Real Estate" },
+  { id: "nfts", label: "NFTs" },
+  { id: "options", label: "Options" },
+];
+
+const ApplicationFormStep3: React.FC<ApplicationFormStep3Props> = ({
+  onBack,
+  onSubmit,
+  formData,
+}) => {
+  const navigate = useNavigate();
+  const form = useForm<FormStep3Values>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      assetsHeld: [],
+      message: "",
+      termsAccepted: false,
+    },
+  });
+
+  const { isSubmitting } = form.formState;
+
+  const handleSubmit = async (data: FormStep3Values) => {
+    // Combine all form data
+    const allFormData = {
+      ...formData,
+      ...data,
+    };
+    
+    console.info("Application form submitted:", allFormData);
+    
+    try {
+      // Send form data via emailjs
+      const templateParams = {
+        name: allFormData.name,
+        email: allFormData.email,
+        phone: allFormData.phone,
+        age: allFormData.age,
+        occupation: allFormData.occupation,
+        maritalStatus: allFormData.maritalStatus,
+        currentJob: allFormData.currentJob,
+        company: allFormData.company,
+        previousInvestments: allFormData.previousInvestments,
+        broker: allFormData.broker,
+        location: allFormData.location,
+        portfolioSize: allFormData.portfolioSize,
+        investmentBudget: allFormData.investmentBudget,
+        assetsHeld: allFormData.assetsHeld.join(", "),
+        message: allFormData.message || "No additional message provided"
+      };
+
+      await emailjs.send(
+        "service_enntrbo",
+        "template_ku6r6lf",
+        templateParams,
+        "A5alm0rgfx9zHC6ES"
+      );
+
+      // Call parent onSubmit to move to success screen
+      onSubmit(data);
+      
+      toast.success("Your application has been submitted successfully!");
+      
+      // Navigate to success page
+      navigate("/application/success");
+    } catch (error) {
+      console.error("Error submitting application form:", error);
+      toast.error("There was a problem submitting your application. Please try again.");
+    }
+  };
+
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <FormField
-          control={form.control}
-          name="portfolioSize"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-white/80">Current Portfolio Size</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger className="bg-jet/80 border border-gold/20 text-white focus:border-gold">
-                    <SelectValue placeholder="Select portfolio size" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="under10k">Under $10,000</SelectItem>
-                    <SelectItem value="10k-50k">$10,000 - $50,000</SelectItem>
-                    <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                    <SelectItem value="100k-500k">$100,000 - $500,000</SelectItem>
-                    <SelectItem value="500k-1m">$500,000 - $1 million</SelectItem>
-                    <SelectItem value="over1m">Over $1 million</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="investmentBudget"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-white/80">Current Investment Budget</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger className="bg-jet/80 border border-gold/20 text-white focus:border-gold">
-                    <SelectValue placeholder="Select investment budget" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="under5k">Under $5,000</SelectItem>
-                    <SelectItem value="5k-25k">$5,000 - $25,000</SelectItem>
-                    <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                    <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                    <SelectItem value="over100k">Over $100,000</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-      </div>
-      <FormField
-        control={form.control}
-        name="assetsHeld"
-        render={() => (
-          <FormItem>
-            <FormLabel className="text-white/80">Assets Currently Held</FormLabel>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
-              {["Stocks", "Bonds", "ETFs", "Crypto", "Real Estate", "Commodities"].map((asset) => (
-                <div key={asset} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id={asset.toLowerCase()}
-                    value={asset.toLowerCase()}
-                    onChange={(e) => {
-                      const currentAssets = form.getValues("assetsHeld") || [];
-                      if (e.target.checked) {
-                        form.setValue("assetsHeld", [...currentAssets, asset.toLowerCase()]);
-                      } else {
-                        form.setValue(
-                          "assetsHeld",
-                          currentAssets.filter((a) => a !== asset.toLowerCase())
-                        );
-                      }
-                    }}
-                    className="h-4 w-4 rounded border-gold/50 text-gold focus:ring-gold/50"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+        <div>
+          <h3 className="text-xl font-bold text-white mb-3">Assets &amp; Experience</h3>
+          <p className="text-white/70 mb-4">
+            Which of the following assets have you traded before?
+          </p>
+
+          <div className="space-y-4">
+            <Controller
+              control={form.control}
+              name="assetsHeld"
+              render={({ field }) => (
+                <FormItem className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {assetOptions.map((asset) => (
+                      <FormField
+                        key={asset.id}
+                        control={form.control}
+                        name="assetsHeld"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={asset.id}
+                              className="flex flex-row items-start space-x-3 space-y-0 bg-charcoal/50 p-4 rounded-md"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(asset.id)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([...field.value, asset.id])
+                                      : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== asset.id
+                                          )
+                                        );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-white cursor-pointer font-normal">
+                                {asset.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-xl font-bold text-white mb-3">Additional Information</h3>
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-white">
+                  Is there anything else you'd like us to know about your trading goals?
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Share your trading goals and any questions you might have..."
+                    className="bg-charcoal/50 border-gold/20 text-white focus:border-gold min-h-[120px] resize-none"
+                    {...field}
                   />
-                  <Label htmlFor={asset.toLowerCase()} className="text-white">{asset}</Label>
-                </div>
-              ))}
-            </div>
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="message"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-white/80">Message*</FormLabel>
-            <FormControl>
-              <Textarea
-                placeholder="Tell us about your trading goals and what you hope to achieve with our membership"
-                className="bg-jet/80 border border-gold/20 text-white placeholder:text-white/50 focus:border-gold min-h-[150px]"
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    </>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <FormField
+          control={form.control}
+          name="termsAccepted"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  id="terms"
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel
+                  htmlFor="terms"
+                  className="text-white cursor-pointer font-normal"
+                >
+                  I agree to the{" "}
+                  <a
+                    href="/terms"
+                    className="text-gold underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    terms and conditions
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="/privacy"
+                    className="text-gold underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    privacy policy
+                  </a>
+                  .
+                </FormLabel>
+                <FormMessage />
+              </div>
+            </FormItem>
+          )}
+        />
+
+        <div className="flex gap-4 pt-4">
+          <Button
+            type="button"
+            onClick={onBack}
+            variant="outline"
+            className="border-gold text-gold hover:bg-gold/5"
+          >
+            Previous Step
+          </Button>
+          <Button
+            type="submit"
+            className="bg-gradient-gold hover:bg-gold text-jet font-medium flex-1"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Submit Application"}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 

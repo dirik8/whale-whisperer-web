@@ -48,7 +48,7 @@ const teamMembers = [
     title: "Luxury Lifestyle Trader",
     bio: "Elite trader specializing in high-growth markets. Transformed a modest portfolio into generational wealth through strategic crypto plays.",
     funFact: "Trades from exclusive resorts worldwide.",
-    image: "/lovable-uploads/a395b613-4f50-4acb-8fb8-dfffc835924d.png",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces",
     social: {
       linkedin: "#",
       twitter: "#"
@@ -197,61 +197,62 @@ const testimonial = {
 const TeamPage = () => (
   <>
     <Header />
-    <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight via-charcoal to-jet relative">
-      <section className="container mx-auto px-4 py-16 relative">
-        <div className="absolute inset-0">
-          <HeroBackground image={heroImage} brightness={0.35} />
-        </div>
-        <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 gold-gradient drop-shadow animate-fade-in">
-            Meet Our <span className="gold-gradient">Elite Team</span>
-          </h1>
-          <p className="text-xl text-white/80 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Strategists, mentors, and visionaries forging tomorrow's elite traders through proven strategies and dedicated support.
-          </p>
-          <div className="flex justify-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-gold"></div>
-            <div className="w-3 h-3 rounded-full bg-gold/60"></div>
-            <div className="w-3 h-3 rounded-full bg-gold/30"></div>
+    <main className="min-h-screen pt-24 bg-gradient-to-b from-midnight via-charcoal to-jet">
+      <section className="relative h-[480px] overflow-hidden mb-16">
+        <HeroBackground image={heroImage} brightness={0.35} />
+        
+        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 gold-gradient drop-shadow animate-fade-in">
+              Meet Our <span className="gold-gradient">Elite Team</span>
+            </h1>
+            <p className="text-xl text-white/80 mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              Strategists, mentors, and visionaries forging tomorrow's elite traders through proven strategies and dedicated support.
+            </p>
+            <div className="flex justify-center gap-3">
+              <div className="w-3 h-3 rounded-full bg-gold"></div>
+              <div className="w-3 h-3 rounded-full bg-gold/60"></div>
+              <div className="w-3 h-3 rounded-full bg-gold/30"></div>
+            </div>
           </div>
         </div>
-        
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-10">
-            {teamMembers.map((member, idx) => (
-              <div
-                key={idx}
-                className="group bg-gradient-to-br from-charcoal/70 to-midnight/70 border border-gold/20 rounded-xl overflow-hidden transition-all hover:scale-105 shadow-lg animate-fade-in"
-                style={{ animationDelay: `${0.1 + idx * 0.1}s` }}
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-110"
-                  />
+      </section>
+      
+      <section className="container mx-auto px-4 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-10">
+          {teamMembers.map((member, idx) => (
+            <div
+              key={idx}
+              className="group bg-gradient-to-br from-charcoal/70 to-midnight/70 border border-gold/20 rounded-xl overflow-hidden transition-all hover:scale-105 shadow-lg animate-fade-in"
+              style={{ animationDelay: `${0.1 + idx * 0.1}s` }}
+            >
+              <div className="aspect-square overflow-hidden">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold gold-gradient mb-1">{member.name}</h3>
+                <p className="text-gold/80 mb-4 text-sm">{member.title}</p>
+                <p className="text-white/80 mb-4 text-sm">{member.bio}</p>
+                <div className="text-xs text-white/60 italic mb-4">
+                  <span className="opacity-90 group-hover:opacity-100 transition-opacity">{member.funFact}</span>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold gold-gradient mb-1">{member.name}</h3>
-                  <p className="text-gold/80 mb-4 text-sm">{member.title}</p>
-                  <p className="text-white/80 mb-4 text-sm">{member.bio}</p>
-                  <div className="text-xs text-white/60 italic mb-4">
-                    <span className="opacity-90 group-hover:opacity-100 transition-opacity">{member.funFact}</span>
-                  </div>
-                  <div className="flex gap-4">
-                    <a href={member.social.linkedin} className="text-gold hover:text-light-gold transition">
-                      <span className="sr-only">LinkedIn</span>
-                      <Book className="w-5 h-5" />
-                    </a>
-                    <a href={member.social.twitter} className="text-gold hover:text-light-gold transition">
-                      <span className="sr-only">Twitter</span>
-                      <Star className="w-5 h-5" />
-                    </a>
-                  </div>
+                <div className="flex gap-4">
+                  <a href={member.social.linkedin} className="text-gold hover:text-light-gold transition">
+                    <span className="sr-only">LinkedIn</span>
+                    <Book className="w-5 h-5" />
+                  </a>
+                  <a href={member.social.twitter} className="text-gold hover:text-light-gold transition">
+                    <span className="sr-only">Twitter</span>
+                    <Star className="w-5 h-5" />
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
         
         <div className="mt-20 mb-16">
@@ -296,9 +297,9 @@ const TeamPage = () => (
           <div className="flex items-center justify-center mb-2">
             <Star className="text-gold mr-2" /> <span className="font-semibold text-gold">Member Story</span>
           </div>
-          <p className="italic text-white/90 text-center mb-4">"{testimonial.text}"</p>
-          <div className="text-gold font-bold text-center">{testimonial.name}</div>
-          <div className="text-white/60 text-xs text-center">{testimonial.bio}</div>
+          <p className="italic text-white/90 text-center mb-4">"The BWC team is unlike any trading community I've joined—they truly want to see each member succeed. The access to expert minds and bottomless support is priceless."</p>
+          <div className="text-gold font-bold text-center">Elijah W., Club Member</div>
+          <div className="text-white/60 text-xs text-center">20-year veteran turned profitable after joining</div>
         </div>
         
         <div className="mt-4 flex justify-center">

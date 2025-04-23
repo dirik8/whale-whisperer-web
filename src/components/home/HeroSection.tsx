@@ -4,23 +4,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Users, Award, ArrowRight, Clock } from "lucide-react";
 import UrgencyTimer from "@/components/ui/urgency-timer";
+import HeroBackground from "@/components/ui/HeroBackground";
 
 const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // Bull image
 
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
-      {/* Animated background image related to crypto/forex */}
-      <div className="absolute top-0 left-0 w-full h-full max-h-[700px]" style={{ zIndex: 0 }}>
-        <img
-          src={heroBg}
-          className="w-full h-full object-contain mx-auto opacity-40 pointer-events-none animate-fade-in"
-          alt="Crypto bull"
-        />
-      </div>
-      
-      {/* Background gradient overlays */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-midnight/80 to-charcoal/90" style={{ zIndex: 1 }}></div>
+      {/* Hero Background */}
+      <HeroBackground image={heroBg} brightness={0.4} />
       
       <div className="container mx-auto relative" style={{ zIndex: 10 }}>
         <div className="max-w-4xl mx-auto text-center">
