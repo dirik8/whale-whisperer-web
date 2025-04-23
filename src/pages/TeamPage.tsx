@@ -41,44 +41,99 @@ const teamMembers = [
     }
   },
   {
-    name: "Marcus Chen",
-    title: "Head of Research",
-    bio: "Former Wall Street quantitative analyst. Develops BWC's proprietary indicators and trading algorithms.",
-    funFact: "Predicted the 2021 crypto bull run within 2 days accuracy.",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces",
+    name: "Jake Miller",
+    title: "Luxury Lifestyle Trader",
+    bio: "Elite trader specializing in high-growth markets. Transformed a modest portfolio into generational wealth through strategic crypto plays.",
+    funFact: "Trades from exclusive resorts worldwide.",
+    image: "/lovable-uploads/a395b613-4f50-4acb-8fb8-dfffc835924d.png",
     social: {
       linkedin: "#",
       twitter: "#"
     }
   },
   {
-    name: "Sarah Blake",
-    title: "Education Director",
-    bio: "20+ years in institutional trading. Transformed BWC's education program into an industry-leading curriculum.",
-    funFact: "Wrote her thesis on crypto market psychology.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces",
+    name: "Mike Barrett",
+    title: "Veteran Strategy Advisor",
+    bio: "Former military professional turned market analyst. Known for his disciplined approach to market volatility and risk management.",
+    funFact: "Never missed a trading day in 7 years.",
+    image: "/lovable-uploads/f165e29f-e42a-4807-ac7f-463461d919a8.png",
     social: {
       linkedin: "#",
       twitter: "#"
     }
   },
   {
-    name: "David Park",
-    title: "Risk Management Specialist",
-    bio: "Former hedge fund risk analyst. Helps members optimize their position sizing and portfolio management.",
-    funFact: "Hasn't had a losing month in 3 years.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces",
-    social: {
-      linkedin: "#",
-      twitter: "#"
-    }
-  },
-  {
-    name: "Elena Rodriguez",
+    name: "Daniel Kim",
     title: "Technical Analysis Expert",
-    bio: "Chartered Market Technician with expertise in multiple timeframe analysis and pattern recognition.",
-    funFact: "Created a custom indicator used by over 10,000 traders.",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=faces",
+    bio: "Automotive enthusiast and technical chart specialist. Pioneered BWC's pattern recognition algorithms for identifying high-probability setups.",
+    funFact: "Created a custom indicator used by over 50,000 traders.",
+    image: "/lovable-uploads/0aae5d0e-bfb1-499a-bbb5-3f2a020677e3.png",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    name: "Alexander Wright",
+    title: "Private Jet Trader",
+    bio: "Travels globally to meet with institutional investors and financial elites. Brings exclusive market intelligence back to BWC members.",
+    funFact: "Analyzes markets from 40,000 feet in the air.",
+    image: "/lovable-uploads/4e9e0a60-de74-43b1-afe9-ef00a1cb2f44.png",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    name: "Julian Hayes",
+    title: "Portfolio Management Specialist",
+    bio: "Conservative trader focused on wealth preservation and moderate growth. Expert in balancing risk across multiple asset classes.",
+    funFact: "Built his first million-dollar portfolio by age 27.",
+    image: "/lovable-uploads/96940b99-53e9-447f-a702-d234958d3301.png",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    name: "Matthew Reynolds",
+    title: "Crypto Wealth Strategist",
+    bio: "Helps elite clients transform modest accounts into significant wealth through carefully timed crypto market entries and exits.",
+    funFact: "Predicted 3 major market reversals to the day.",
+    image: "/lovable-uploads/3072603b-b9f3-47b0-ac27-2b255d45f5d7.png",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    name: "Chris Waller",
+    title: "First Class Trading Expert",
+    bio: "Luxury lifestyle trader who specializes in trading from exotic locations. Delivers training sessions from his worldwide travels.",
+    funFact: "Traded his way to a villa in Bali.",
+    image: "/lovable-uploads/8197a8e9-2f85-4017-87d1-431a82b2a699.png",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    name: "Trevor Johnson",
+    title: "Wealth Management Advisor",
+    bio: "Top-tier financial planner helping BWC members transform trading profits into generational wealth and passive income streams.",
+    funFact: "Created a unique tax optimization strategy for traders.",
+    image: "/lovable-uploads/2edfec52-6c73-48ef-a5c1-ab562a4e4685.png",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    name: "Brandon Lewis",
+    title: "Trading Psychology Coach",
+    bio: "Masterful mentor focused on the mental game of trading. Helps members overcome emotional barriers to consistent profitability.",
+    funFact: "Has coached Olympic athletes on peak performance.",
+    image: "/lovable-uploads/7443ac53-69c5-4925-8ca5-5b7dee459de4.png",
     social: {
       linkedin: "#",
       twitter: "#"
@@ -123,17 +178,6 @@ const teamMembers = [
     bio: "Former forex trader with expertise in international markets and macro analysis.",
     funFact: "Speaks five languages, trades in three time zones.",
     image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces",
-    social: {
-      linkedin: "#",
-      twitter: "#"
-    }
-  },
-  {
-    name: "Ryan O'Connor",
-    title: "Swing Trading Specialist",
-    bio: "Developed BWC's swing trading framework. Expert in identifying high-probability setups.",
-    funFact: "Achieved 312% returns in his first year of trading.",
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&crop=faces",
     social: {
       linkedin: "#",
       twitter: "#"

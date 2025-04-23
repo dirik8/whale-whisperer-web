@@ -2,6 +2,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Clock } from "lucide-react";
+import UrgencyTimer from "@/components/ui/urgency-timer";
 
 const CTASection = () => {
   return (
@@ -14,6 +16,13 @@ const CTASection = () => {
       
       <div className="container mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Urgency Timer */}
+          <div className="inline-flex items-center px-4 py-2 bg-red-500/20 rounded-full border border-red-500/30 text-red-400 font-medium text-sm mb-4 animate-pulse">
+            <Clock className="w-4 h-4 mr-2" />
+            <UrgencyTimer />
+            <span className="ml-2">— Only 3 slots remaining!</span>
+          </div>
+          
           {/* Limited spots badge */}
           <div className="inline-block px-4 py-2 bg-gold/10 rounded-full border border-gold/20 text-gold font-medium text-sm mb-6 animate-fade-in">
             Applications closing soon

@@ -2,25 +2,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Users, Award, ArrowRight } from "lucide-react";
+import { TrendingUp, Users, Award, ArrowRight, Clock } from "lucide-react";
+import UrgencyTimer from "@/components/ui/urgency-timer";
 
-const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // New bull image
+const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // Bull image
 
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
       {/* Animated background image related to crypto/forex */}
-      <img
-        src={heroBg}
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-40 pointer-events-none animate-fade-in"
-        alt="Crypto bull"
-        style={{ zIndex: 0, maxHeight: 700, minHeight: 400 }}
-      />
+      <div className="absolute top-0 left-0 w-full h-full max-h-[700px]" style={{ zIndex: 0 }}>
+        <img
+          src={heroBg}
+          className="w-full h-full object-contain mx-auto opacity-40 pointer-events-none animate-fade-in"
+          alt="Crypto bull"
+        />
+      </div>
+      
       {/* Background gradient overlays */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-midnight/80 to-charcoal/90" style={{ zIndex: 1 }}></div>
       
       <div className="container mx-auto relative" style={{ zIndex: 10 }}>
         <div className="max-w-4xl mx-auto text-center">
+          {/* Urgency Timer */}
+          <div className="inline-flex items-center px-4 py-2 bg-red-500/20 rounded-full border border-red-500/30 text-red-400 font-medium text-sm mb-4 animate-pulse">
+            <Clock className="w-4 h-4 mr-2" />
+            <UrgencyTimer />
+            <span className="ml-2">— Only 3 slots remaining!</span>
+          </div>
+          
           {/* Badge */}
           <div className="inline-block px-4 py-2 bg-gold/10 rounded-full border border-gold/20 text-gold font-medium text-sm mb-6 animate-fade-in">
             We accept only 50 traders annually

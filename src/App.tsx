@@ -18,6 +18,9 @@ import FAQPage from "./pages/FAQPage";
 import EducationHubPage from "./pages/EducationHubPage";
 import CoachingPage from "./pages/CoachingPage";
 import VIPUniversityPage from "./pages/VIPUniversityPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/TermsOfServicePage";
+import RiskDisclaimerPage from "./pages/RiskDisclaimerPage";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -43,6 +46,9 @@ const App = () => {
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/education-hub" element={<EducationHubPage />} />
                 <Route path="/coaching" element={<CoachingPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+                <Route path="/risk-disclaimer" element={<RiskDisclaimerPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
