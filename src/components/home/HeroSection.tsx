@@ -5,7 +5,7 @@ import { TrendingUp, Users, Award, ArrowRight, Clock, AlertTriangle } from "luci
 import UrgencyTimer from "@/components/ui/urgency-timer";
 import HeroBackground from "@/components/ui/HeroBackground";
 
-const heroBg = "/lovable-uploads/1ac46409-fdce-4d56-9a61-29fa157968ae.png"; 
+const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; 
 
 const HeroSection = () => {
   return (
