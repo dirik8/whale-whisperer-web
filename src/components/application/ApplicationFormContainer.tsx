@@ -19,6 +19,7 @@ const ApplicationFormContainer = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [step, setStep] = useState(1);
   const totalSteps = 3;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ApplicationFormValues>({
     resolver: zodResolver(applicationFormSchema),
@@ -52,7 +53,10 @@ const ApplicationFormContainer = () => {
   };
 
   const onSubmit = async (values: ApplicationFormValues) => {
+    if (isSubmitting) return; // Prevent multiple submissions
+    
     try {
+      setIsSubmitting(true);
       console.log('Application form submitted:', values);
       
       await emailjs.send(
@@ -90,6 +94,8 @@ const ApplicationFormContainer = () => {
         description: "There was an error submitting your application. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -157,9 +163,10 @@ const ApplicationFormContainer = () => {
               ) : (
                 <Button 
                   type="submit"
+                  disabled={isSubmitting}
                   className="bg-gradient-gold text-jet flex items-center gap-2"
                 >
-                  Submit Application <ArrowRight className="w-4 h-4" />
+                  {isSubmitting ? "Submitting..." : "Submit Application"} {!isSubmitting && <ArrowRight className="w-4 h-4" />}
                 </Button>
               )}
             </div>
