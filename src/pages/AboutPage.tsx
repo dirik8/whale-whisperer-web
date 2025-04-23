@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -6,6 +7,8 @@ import SectionHeading from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { TrendingUp, Target, Lock, BarChart3 } from "lucide-react";
+
+const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // Bull image
 
 const AboutPage = () => {
   const milestones = [
@@ -65,7 +68,19 @@ const AboutPage = () => {
       <main className="min-h-screen pt-24">
         {/* Hero Section */}
         <section className="py-20 px-4 bg-midnight relative overflow-hidden">
-          <div className="container mx-auto">
+          {/* Background Image */}
+          <div className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 0 }}>
+            <img
+              src={heroBg}
+              className="w-full h-full object-contain mx-auto opacity-40 pointer-events-none animate-fade-in"
+              alt="Crypto bull"
+            />
+          </div>
+          
+          {/* Background gradient overlay */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-midnight/80 to-charcoal/90" style={{ zIndex: 1 }}></div>
+          
+          <div className="container mx-auto relative z-10">
             <div className="max-w-4xl">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
                 From CPA to Crypto Kingmaker – <span className="gold-gradient">The Story Behind Bullish Whales</span>

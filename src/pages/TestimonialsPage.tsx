@@ -9,14 +9,28 @@ import WrittenTestimonialsSection from "@/components/testimonials/WrittenTestimo
 import FeaturedTransformationSection from "@/components/testimonials/FeaturedTransformationSection";
 import StatsSection from "@/components/testimonials/StatsSection";
 
+const heroBg = "/lovable-uploads/f690793a-d82d-4823-8abc-d6fb222a8e28.png"; // Bull image
+
 const TestimonialsPage = () => {
   return (
     <>
       <Header />
       <main className="min-h-screen pt-24">
         {/* Hero Section */}
-        <section className="py-20 px-4 bg-midnight">
-          <div className="container mx-auto">
+        <section className="py-20 px-4 bg-midnight relative overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 0 }}>
+            <img
+              src={heroBg}
+              className="w-full h-full object-contain mx-auto opacity-40 pointer-events-none animate-fade-in"
+              alt="Crypto bull"
+            />
+          </div>
+          
+          {/* Background gradient overlay */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-midnight/80 to-charcoal/90" style={{ zIndex: 1 }}></div>
+          
+          <div className="container mx-auto relative z-10">
             <div className="max-w-4xl">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
                 They Joined. They Profited. <span className="gold-gradient">You're Next.</span>
