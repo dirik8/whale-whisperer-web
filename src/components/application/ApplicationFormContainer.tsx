@@ -20,6 +20,7 @@ const ApplicationFormContainer = () => {
   const [step, setStep] = useState(1);
   const totalSteps = 3;
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
   const form = useForm<ApplicationFormValues>({
     resolver: zodResolver(applicationFormSchema),
@@ -52,8 +53,17 @@ const ApplicationFormContainer = () => {
     window.scrollTo(0, 0);
   };
 
+  const handleFinalSubmit = () => {
+    setIsReadyToSubmit(true);
+    form.handleSubmit(onSubmit)();
+  };
+
   const onSubmit = async (values: ApplicationFormValues) => {
     if (isSubmitting) return; // Prevent multiple submissions
+    if (!isReadyToSubmit && step !== totalSteps) {
+      nextStep();
+      return;
+    }
     
     try {
       setIsSubmitting(true);
@@ -96,6 +106,7 @@ const ApplicationFormContainer = () => {
       });
     } finally {
       setIsSubmitting(false);
+      setIsReadyToSubmit(false);
     }
   };
 
@@ -133,7 +144,7 @@ const ApplicationFormContainer = () => {
         <ApplicationSuccess />
       ) : (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="bg-charcoal/90 backdrop-blur-sm border border-gold/20 rounded-xl shadow-lg p-8 flex flex-col gap-6 mb-8 animate-fade-in">
+          <form onSubmit={(e) => e.preventDefault()} className="bg-charcoal/90 backdrop-blur-sm border border-gold/20 rounded-xl shadow-lg p-8 flex flex-col gap-6 mb-8 animate-fade-in">
             <h3 className="text-2xl font-bold text-center mb-2">
               <span className="text-gold">Step {step}</span>: {getStepTitle()}
             </h3>
@@ -162,7 +173,8 @@ const ApplicationFormContainer = () => {
                 </Button>
               ) : (
                 <Button 
-                  type="submit"
+                  type="button"
+                  onClick={handleFinalSubmit}
                   disabled={isSubmitting}
                   className="bg-gradient-gold text-jet flex items-center gap-2"
                 >

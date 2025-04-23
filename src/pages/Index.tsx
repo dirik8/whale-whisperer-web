@@ -9,6 +9,7 @@ import ProgramsSection from "@/components/home/ProgramsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
 import FeaturedVideoSection from "@/components/home/FeaturedVideoSection";
+import UrgencyBanner from "@/components/application/UrgencyBanner";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <Header />
       <main className="min-h-screen">
         <HeroSection />
+        <UrgencyBanner />
         <AboutSection />
         <FeaturesSection />
         <FeaturedVideoSection />
