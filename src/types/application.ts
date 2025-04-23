@@ -15,8 +15,8 @@ export const applicationFormSchema = z.object({
   location: z.string().optional(),
   portfolioSize: z.string().optional(),
   investmentBudget: z.string().optional(),
-  assetsHeld: z.string().array().optional(),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  assetsHeld: z.array(z.string()).default([]),
+  message: z.string().optional(),
 });
 
 export type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
